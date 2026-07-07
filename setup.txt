@@ -1,0 +1,2 @@
+1. Delete unnecessary react/vite images in assets
+2. npm install for react-router-dom and tailwindcss
