@@ -1,3 +1,4 @@
+import { Home } from './Home';
 import './App.css'
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-red-500'>Yo</h1>
+      <Home />
     </>
   )
 }
