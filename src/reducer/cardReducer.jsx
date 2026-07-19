@@ -7,6 +7,9 @@ export const cardReducer = (state, action) => {
         case 'REMOVE_FROM_LIST':
             return {...state, cardList: payload.cardList}
 
+        case 'UPDATE_LIST':
+            return {...state, cardList: payload.cardList}
+
         default:
             throw new Error('No case found!');
     }

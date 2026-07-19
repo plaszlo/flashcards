@@ -36,10 +36,25 @@ export const CardProvider = ({children}) => {
 		})
 	}
 
+	function updateCard(id, updatedPart){
+		const updatedList = state.cardList.map(card => 
+			card.id === id
+			? { ...card, ...updatedPart}
+			: card
+		)
+		dispatch({
+			type: 'UPDATE_LIST',
+			payload: {
+				cardList: updatedList
+			}
+		})
+	}
+
 	const value = {
 		cardList: state.cardList,
 		addToList,
-		removeFromList
+		removeFromList,
+		updateCard
 	};
 	
 	return (
