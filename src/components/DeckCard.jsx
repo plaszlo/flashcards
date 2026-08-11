@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDeck } from '../context/CardContext';
 
-export const Card = ({id, term, def}) => {
+export const DeckCard = ({card}) => {
+  const { id, term, def, status } = card;
   const { cardList, removeFromList, updateCard } = useDeck();
   const textareaRef = useRef();
   const [definition, setDefinition] = useState(def);
@@ -13,10 +14,19 @@ export const Card = ({id, term, def}) => {
     ta.style.height = `${ta.scrollHeight}px`;
   }, []);
 
+  const statusClasses = {
+    practising: 'bg-orange-100',
+    unlearnt: 'bg-sky-100',
+    learnt: 'bg-emerald-100',
+  };
+
+  console.log(status);
+
   return (
     <div className=' p-2 flex gap-2.5'>
+      <i onClick={() => updateCard(id, {status: 'practising'})} className='bi bi-arrow-up-circle text-green-700 text-2xl hover:drop-shadow-[0_0_10px_rgba(80,230,80,0.9)]'></i>
       <input 
-        className="bg-blue-100 w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit"
+        className="bg-sky-100 w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit"
         maxLength={30}
         value={termInput}
         onBlur={() => {updateCard(id, {term: termInput})}}
@@ -27,7 +37,7 @@ export const Card = ({id, term, def}) => {
         }
       ></input>
       <textarea 
-        className="bg-blue-100 w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none"
+        className={`${statusClasses[status]}  w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none`}
         ref={textareaRef}
         value={definition}
         onBlur={() => {updateCard(id, {def: definition})}}

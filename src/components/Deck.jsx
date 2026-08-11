@@ -1,5 +1,5 @@
 import { useDeck } from "../context/CardContext";
-import { Card } from './Card';
+import { DeckCard } from './DeckCard';
 
 export const Deck = () => {
     const { cardList } = useDeck();
@@ -11,7 +11,7 @@ export const Deck = () => {
             <span className='bg-gray-200 rounded-full py-0.5 px-2.5'>{cardList.length}</span>
         </div>
         { cardList.map(card => (
-            <Card key={card.id} id={card.id} term={card.term} def={card.def} />
+            <DeckCard key={card.id} card={card}/>
         )) }
     </div>
   )
