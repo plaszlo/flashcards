@@ -7,7 +7,7 @@ import practiceRoundSFX from '../assets/practice_round.mp3';
 import practiceCompleteSFX from '../assets/practice_complete.mp3';
 
 export const Practice = () => {
-    const { cardList, updateCard } = useDeck();
+    const { cardList, updateDeck } = useDeck();
 
     const [practiceList, setPracticeList] = useState(
         cardList.filter(card => card.status === 'practising')
@@ -27,10 +27,9 @@ export const Practice = () => {
     }
 
     function handleWordsSubmit(){
-        practiceList.forEach(card => {
-            updateCard(card.id, { status: 'learnt' });
-        });
-        setPracticeList([]);
+        updateDeck(practisedCards);
+        setPractiseRound(0);
+        setPractisedCards(new Set());
     }
 
     function shuffle(array) {
@@ -64,6 +63,12 @@ export const Practice = () => {
             }
         }
     }, [practisedCards, practiceList.length])
+
+    useEffect(() => {
+        setPracticeList(
+            cardList.filter(card => card.status === 'practising')
+        );
+    }, [cardList]);
 
   return (
     <div className="border border-gray-400 rounded-xl py-1 mb-10">
@@ -109,7 +114,7 @@ export const Practice = () => {
                 ))
             ) : (
                 practiceList.map(card => (
-                    <div className="p-2 flex gap-2.5">
+                    <div className="p-2 flex gap-2.5" key={card.id}>
                         <span className={
                             practiseRound === 2 ? (
                                 'bg-emerald-100 p-1 rounded w-1/2 h-fit' 

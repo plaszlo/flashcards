@@ -43,6 +43,20 @@ export const CardProvider = ({children}) => {
 			: card
 		)
 		dispatch({
+			type: 'UPDATE_CARD',
+			payload: {
+				cardList: updatedList
+			}
+		})
+	}
+
+	function updateDeck(amendedElements){
+		const updatedList = state.cardList.map(card => 
+			amendedElements.has(card.id)
+				? { ...card, status: 'learnt' }
+				: card
+		)
+		dispatch({
 			type: 'UPDATE_LIST',
 			payload: {
 				cardList: updatedList
@@ -54,7 +68,8 @@ export const CardProvider = ({children}) => {
 		cardList: state.cardList,
 		addToList,
 		removeFromList,
-		updateCard
+		updateCard,
+		updateDeck
 	};
 	
 	return (

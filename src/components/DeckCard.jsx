@@ -17,7 +17,7 @@ export const DeckCard = ({card}) => {
   const statusClasses = {
     practising: 'bg-orange-100',
     unlearnt: 'bg-sky-100',
-    learnt: 'bg-emerald-100',
+    learnt: 'bg-emerald-50 text-slate-500',
   };
 
   console.log(status);
@@ -26,7 +26,7 @@ export const DeckCard = ({card}) => {
     <div className=' p-2 flex gap-2.5'>
       <i onClick={() => updateCard(id, {status: 'practising'})} className='bi bi-arrow-up-circle text-green-700 text-2xl hover:drop-shadow-[0_0_10px_rgba(80,230,80,0.9)]'></i>
       <input 
-        className="bg-sky-100 w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit"
+        className={`${statusClasses[status]} w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit`}
         maxLength={30}
         value={termInput}
         onBlur={() => {updateCard(id, {term: termInput})}}

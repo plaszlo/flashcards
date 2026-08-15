@@ -7,6 +7,7 @@ export const PracticeCard = ({card, isPractised, onPractised}) => {
     useEffect(() => {
       if(termInput === term){
         onPractised(id);
+        setTermInput('');
       }
     }, [termInput]);
 
