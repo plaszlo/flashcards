@@ -1,5 +1,4 @@
-import { AddCard } from './AddCard';
-import { Deck, Practice } from './components';
+import { AddCard, Deck, Practice, Calendar } from './components';
 
 export const Home = () => {
 
@@ -10,6 +9,7 @@ export const Home = () => {
         </header>
         <section className='max-w-7xl mx-auto p-5'>
             <AddCard />
+            <Calendar />
             <Practice />
             <Deck />
         </section>

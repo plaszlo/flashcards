@@ -27,7 +27,7 @@ export const Practice = () => {
     }
 
     function handleWordsSubmit(){
-        updateDeck(practisedCards);
+        updateDeck(practisedCards, {status: 'learnt'});
         setPractiseRound(0);
         setPractisedCards(new Set());
     }

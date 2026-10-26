@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { toast } from "react-toastify";
-import { useDeck } from "./context/CardContext";
+import { useDeck } from "../context/CardContext";
 
 
 export const AddCard = () => {
@@ -23,14 +23,14 @@ export const AddCard = () => {
             return
         }
 
-        const newCard = {id: crypto.randomUUID(), term, def, status: 'unlearnt'}
+        const newCard = {id: crypto.randomUUID(), term, def, status: 'unlearnt', repetition: 0, lastInterval: undefined}
         addToList(newCard);
         textareaRef.scrollHeight = '32px';
         e.target.reset();
     }
     
   return (
-    <div className="border border-slate-400 p-2 rounded-xl mb-10">
+    <div className="border border-gray-400 p-2 rounded-xl mb-10">
         <form onSubmit={handleSubmit}>
             <div className='flex gap-2.5'>
                 <input name="term" type="text" placeholder="Term" className="bg-slate-100 w-1/2 rounded p-1 h-fit" maxLength={30}></input>
