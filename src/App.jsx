@@ -1,4 +1,5 @@
-import { Home } from './Home';
+import { AllRoutes } from './routes/AllRoutes';
+import { Header } from './components/Header';
 import './App.css'
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-      <Home />
+      <Header />
+      <AllRoutes />
     </>
   )
 }
