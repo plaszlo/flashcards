@@ -96,23 +96,23 @@ export const Calendar = () => {
     }
 
     return (
-        <div className="border border-gray-400 rounded-xl p-2 mb-10">
-            <h2 className="text-xl font-semibold mb-2">Calendar</h2>
+        <div className="border border-gray-400 rounded-xl p-2 mb-10 dark:border-2 dark:border-gray-950 ">
+            <h2 className="text-xl font-semibold mb-2 dark:text-slate-300">Calendar</h2>
 
             <div className='flex'>
-                <div className='flex flex-col gap-2 w-1/8 text-center mr-2'>
+                <div className='flex flex-col gap-2 w-1/8 text-center mr-2 dark:text-slate-300'>
                     <div>Week</div>
                     {weekNumbers.map(week => (
                         <ul
                             key={week}
-                            className="border border-gray-200 rounded h-6"
+                            className="border border-gray-200 rounded h-6 "
                         >
                             <li>{week}</li>
                         </ul>
                     ))}
                 </div>
 
-                <div className='w-7/8 grid grid-cols-7 grid-rows-5 text-center gap-2 '>
+                <div className='w-7/8 grid grid-cols-7 grid-rows-5 text-center gap-2 dark:text-slate-300'>
                     {nameOfDays.map(element => (
                         <div key={element}>{element}</div>
                     ))}

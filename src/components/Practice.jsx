@@ -71,10 +71,10 @@ export const Practice = () => {
     }, [cardList]);
 
   return (
-    <div className="border border-gray-400 rounded-xl py-1 mb-10">
+    <div className="border border-gray-400 rounded-xl py-1 mb-10 dark:border-2 dark:border-gray-950">
         <div className="flex justify-between">
             <div>
-                <span className="text-xl font-semibold p-2">Practice</span>
+                <span className="text-xl font-semibold p-2 dark:text-slate-300">Practice</span>
                 { isPractise ? (
                     <i onClick={() => setIsPractise(!isPractise)} className="bi bi-pause-circle text-2xl text-yellow-300 hover:drop-shadow-[0_0_10px_rgba(230,230,80,0.9)]"></i>
                 ) : (
