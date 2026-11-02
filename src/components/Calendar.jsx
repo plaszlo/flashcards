@@ -78,8 +78,6 @@ export const Calendar = () => {
         }
     ];
 
-    console.log(weekNumbers);
-
     function getISOWeek(date) {
         const d = new Date(date);
         d.setHours(0, 0, 0, 0);

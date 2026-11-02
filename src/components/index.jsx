@@ -3,4 +3,7 @@ export { DeckCard } from './DeckCard';
 export { Deck } from './Deck';
 export { Practice } from './Practice';
 export { Calendar } from './Calendar';
-export { Header } from './Header';
+
+export { Header } from './Header/Header';
+export { LoginForm } from './Header/LoginForm';
+export { LoggedInMenu } from './Header/LoggedInMenu';
