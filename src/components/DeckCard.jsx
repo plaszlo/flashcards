@@ -15,12 +15,10 @@ export const DeckCard = ({card}) => {
   }, []);
 
   const statusClasses = {
-    practising: 'bg-orange-100',
-    unlearnt: 'bg-sky-100',
-    learnt: 'bg-emerald-50 text-slate-500',
+    practising: 'bg-orange-100 dark:bg-taupe-500',
+    unlearnt: 'bg-sky-100 dark:bg-slate-500',
+    learnt: 'bg-emerald-50 text-slate-500 dark:bg-mist-500 dark:text-black',
   };
-
-  console.log(status);
 
   return (
     <div className=' p-2 flex gap-2.5'>

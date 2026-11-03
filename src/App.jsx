@@ -1,13 +1,15 @@
-import { Home } from './Home';
+import { AllRoutes } from './routes/AllRoutes';
+import { Header } from './components/Header/Header';
 import './App.css'
 
 function App() {
 
 
   return (
-    <>
-      <Home />
-    </>
+    <div className='min-h-screen dark:bg-black'>
+      <Header />
+      <AllRoutes />
+    </div>
   )
 }
 

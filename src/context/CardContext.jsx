@@ -50,10 +50,10 @@ export const CardProvider = ({children}) => {
 		})
 	}
 
-	function updateDeck(amendedElements){
+	function updateDeck(amendedElements, updatedPart){
 		const updatedList = state.cardList.map(card => 
 			amendedElements.has(card.id)
-				? { ...card, status: 'learnt' }
+				? { ...card, ...updatedPart }
 				: card
 		)
 		dispatch({
