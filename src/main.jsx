@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
     <Router>
       <AuthProvider>
         <CardProvider>
-          <ToastContainer closeButton={false} autoClose={3000} position={'bottom-right'} />
+          <ToastContainer closeButton={false} autoClose={4000} position={'bottom-right'} />
           <App />
         </CardProvider>
       </AuthProvider>
