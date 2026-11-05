@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export async function register(authDetails) {
   const requestOptions = {
     method: "PUT",
@@ -6,7 +8,7 @@ export async function register(authDetails) {
   }
 
   // LOOKUP: what is 2nd arg of fetch, what is promise?
-  const response = await fetch("http://localhost:5073/User/UpsertUser", requestOptions);
+  const response = await fetch(`${API_URL}/User/UpsertUser`, requestOptions);
   
   if(!response.ok){
     const errorMessage = await response.text();
@@ -23,7 +25,7 @@ export async function amendUser(authDetails){
     body: JSON.stringify(authDetails)
   }
 
-  const response = await fetch("http://localhost:5073/User/UpsertUser", requestOptions);
+  const response = await fetch(`${API_URL}/User/UpsertUser`, requestOptions);
 
   if(!response.ok){
     const errorMessage = await response.text();
@@ -36,7 +38,7 @@ export async function amendUser(authDetails){
 export async function deleteUser(userId){
   const requestOptions = {method: "DELETE"}
 
-  const response = await fetch(`http://localhost:5073/User/User/${userId}`, requestOptions);
+  const response = await fetch(`${API_URL}/User/User/${userId}`, requestOptions);
 
   if(!response.ok){
     const errorMessage = await response.text();
