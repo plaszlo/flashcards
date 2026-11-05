@@ -22,7 +22,7 @@ export const Header = () => {
           <span onClick={() => setDarkMode(!darkMode)} className="text-right">
             <i className='bi bi-moon-stars-fill mx-3 text-3xl cursor-pointer dark:text-slate-300' />
           </span>
-          <span onClick='' className="text-right">
+          <span className="text-right">
             <i 
               className={`bi bi-person-circle text-3xl cursor-pointer dark:text-slate-300 ${
                 isLoggedIn && 'text-sky-600 dark:!text-sky-600'

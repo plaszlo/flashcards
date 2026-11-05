@@ -114,14 +114,14 @@ export const Calendar = () => {
                     {nameOfDays.map(element => (
                         <div key={element}>{element}</div>
                     ))}
-                    { passedDaysOfWeek.map(day => (
-                        <span>{day}</span>
+                    { passedDaysOfWeek.map((day, index) => (
+                        <span key={index}>{day}</span>
                     )) }
-                    {schedule.map(day => {
+                    {schedule.map((day, index) => {
                         const grouped = Object.groupBy(day.cards, card => card.repetition);
 
                         return (
-                            <button className="bg-gray-200 rounded h-6 flex gap-1">
+                            <button key={index} className="bg-gray-200 rounded h-6 flex gap-1">
                                 {Object.entries(grouped).map(([repetition, cards]) => (
                                     <span key={repetition} className={`${repProgDesign[repetition]} px-1.75 py-0.125 rounded-full`}>
                                         {cards.length}

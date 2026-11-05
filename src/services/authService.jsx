@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'http://localhost:5073';
 
 export async function register(authDetails) {
   const requestOptions = {
