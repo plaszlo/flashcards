@@ -9,7 +9,7 @@ export async function register(authDetails) {
   }
 
   // LOOKUP: what is 2nd arg of fetch, what is promise?
-  const response = await fetch(`${API_URL}/User/UpsertUser`, requestOptions);
+  const response = await fetch(`${API_URL}/User/UpdateUser`, requestOptions);
   
   if(!response.ok){
     const errorMessage = await response.text();

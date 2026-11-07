@@ -8,12 +8,12 @@ export const LoginForm = () => {
   return (
     <div className="flex">
         <input 
-            className="bg-gray-100 w-23 mx-3 px-1" placeholder="User name"
+            className="bg-gray-100 w-23 mx-3 px-1 dark:bg-slate-300" placeholder="User name"
             onFocus={() => setisLoginButton(true)}
             onBlur={(e) => setisLoginButton(e.target.value.length > 0)}
             onChange={(e) => setisLoginButton(e.target.value.length > 0)}
           />
-          <input className="bg-gray-100 w-23 px-1" placeholder="Password"
+          <input className="bg-gray-100 w-23 px-1 dark:bg-slate-300" placeholder="Password"
             onFocus={() => setisLoginButton(true)}
             onBlur={(e) => setisLoginButton(e.target.value.length > 0)}
             onChange={(e) => setisLoginButton(e.target.value.length > 0)}
