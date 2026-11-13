@@ -1,14 +1,36 @@
+import { useContext } from "react"
+import { AuthContext } from "../context/AuthContext"
 import { Routes, Route } from "react-router-dom";
-import { Home, Register, PageNotFound, Settings, Welcome } from "../pages";
+import { Home, PageNotFound, Settings, Welcome } from "../pages";
+import { RedirectRoute } from "./RedirectRoute";
 
 export const AllRoutes = () => {
-  return (
-    <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="welcome" element={<Welcome/>}></Route>
-        <Route path="register" element={<Register/>}></Route>
-        <Route path='/*' element={<PageNotFound />} />
-        <Route path='/settings' element={<Settings />} />
-    </Routes>
-  )
+    const { isLoggedIn } = useContext(AuthContext);
+
+    return (
+        <Routes>
+            <Route 
+                path="/" 
+                element={
+                    <RedirectRoute condition={isLoggedIn} redirectPath="/welcome"><Home /></RedirectRoute>
+                }
+            />
+
+            <Route 
+                path="welcome" 
+                element={
+                    <RedirectRoute condition={!isLoggedIn} redirectPath="/"><Welcome /></RedirectRoute>
+                }
+            />
+
+            <Route
+                path='/settings'
+                element={
+                    <RedirectRoute condition={isLoggedIn} redirectPath="/welcome"><Settings /></RedirectRoute>
+                } 
+            />
+
+            <Route path='/*' element={<PageNotFound />} />
+        </Routes>
+    )
 }

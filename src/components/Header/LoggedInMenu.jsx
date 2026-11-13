@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export const LoggedInMenu = () => {
-    const { setIsLoggedIn } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export const LoggedInMenu = () => {
         </button>
         <button 
             className="w-20 text-red-600 ml-3 border-2 border-red-600 rounded px-2.5"
-            onClick={() => setIsLoggedIn(false)}
+            onClick={logout}
         >
             Logout
         </button>

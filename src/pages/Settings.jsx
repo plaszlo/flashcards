@@ -1,11 +1,17 @@
 import { toast } from "react-toastify";
 import { amendUser, deleteUser } from "../services/authService";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 export const Settings = () => {
+   const navigate = useNavigate();
+
+   const { logout } = useContext(AuthContext);
+
    async function handleAmend(e){
       e.preventDefault();
       const authDetails = {
-         userId: 15, // TODO: Make this dynamic
          name: e.target.name.value,
          email: e.target.email.value
       }
@@ -16,18 +22,17 @@ export const Settings = () => {
             toast.success("Amended successfully");
          }
       } catch (error) {
-         console.log(error.message)
+         toast.error(error.message)
       }
    }
 
    async function handleDelete(){
       try {
-         const success = await deleteUser(16); // TODO: Make this dynamic
-         if(success){
-            console.log("deleted account successfully");
-         }
+         await deleteUser();
+         toast.success("Account is deleted successfully");
+         logout();
       } catch (error) {
-         console.log(error.message);
+         toast.error(error.message);
       }
    }
 

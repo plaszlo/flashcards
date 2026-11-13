@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { login } from "../../services/authService";
+import { login as authLogin} from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const Login = () => {
-    const { setIsLoggedIn} = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { login} = useContext(AuthContext);
 
     async function handleRegister(e){
         e.preventDefault();
@@ -16,10 +14,8 @@ export const Login = () => {
         }
 
         try {
-            await login(authDetails);
-
-            setIsLoggedIn(true);
-            navigate("/");
+            await authLogin(authDetails);
+            login();
         }
         catch (error) {
             toast.error(error.message);

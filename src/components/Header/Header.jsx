@@ -30,7 +30,7 @@ export const Header = () => {
                     ) : (
                         <i className='bi bi-person-circle text-3xl dark:text-slate-300' />
                     ) }
-                    {showUserPanel && <LoggedInMenu /> }
+                    {showUserPanel && isLoggedIn && <LoggedInMenu /> }
                 </div>
             </div>
         </header>
