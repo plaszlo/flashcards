@@ -5,5 +5,6 @@ export { Practice } from './Practice';
 export { Calendar } from './Calendar';
 
 export { Header } from './Header/Header';
-export { LoginForm } from './Header/LoginForm';
 export { LoggedInMenu } from './Header/LoggedInMenu';
+export { Login } from './Auth/Login';
+export { Registration } from './Auth/Registration';

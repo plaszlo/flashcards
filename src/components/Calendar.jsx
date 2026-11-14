@@ -94,7 +94,7 @@ export const Calendar = () => {
     }
 
     return (
-        <div className="border border-gray-400 rounded-xl p-2 mb-10 dark:border-2 dark:border-gray-950 ">
+        <div className="border border-gray-400 rounded-xl p-2 mb-10">
             <h2 className="text-xl font-semibold mb-2 dark:text-slate-300">Calendar</h2>
 
             <div className='flex'>
@@ -114,16 +114,16 @@ export const Calendar = () => {
                     {nameOfDays.map(element => (
                         <div key={element}>{element}</div>
                     ))}
-                    { passedDaysOfWeek.map(day => (
-                        <span>{day}</span>
+                    { passedDaysOfWeek.map((day, index) => (
+                        <span key={index}>{day}</span>
                     )) }
-                    {schedule.map(day => {
+                    {schedule.map((day, index) => {
                         const grouped = Object.groupBy(day.cards, card => card.repetition);
 
                         return (
-                            <button className="bg-gray-200 rounded h-6 flex gap-1">
+                            <button key={index} className="bg-gray-200 rounded h-6 flex gap-1 dark:bg-slate-300">
                                 {Object.entries(grouped).map(([repetition, cards]) => (
-                                    <span key={repetition} className={`${repProgDesign[repetition]} px-1.75 py-0.125 rounded-full`}>
+                                    <span key={repetition} className={`${repProgDesign[repetition]} px-1.75 py-0.125 rounded-full dark:text-black`}>
                                         {cards.length}
                                     </span>
                                 ))}

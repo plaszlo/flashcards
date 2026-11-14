@@ -71,7 +71,7 @@ export const Practice = () => {
     }, [cardList]);
 
   return (
-    <div className="border border-gray-400 rounded-xl py-1 mb-10 dark:border-2 dark:border-gray-950">
+    <div className="border border-gray-400 rounded-xl py-1 mb-10">
         <div className="flex justify-between">
             <div>
                 <span className="text-xl font-semibold p-2 dark:text-slate-300">Practice</span>
@@ -93,7 +93,7 @@ export const Practice = () => {
                         className={`bi bi-check-square text-2xl mr-2 ${
                             index < practiseRound
                                 ? "text-green-700"
-                                : "text-gray-300"
+                                : "text-gray-300 dark:text-slate-700"
                         }`}
                     ></i>
                 ))}
@@ -117,16 +117,16 @@ export const Practice = () => {
                     <div className="p-2 flex gap-2.5" key={card.id}>
                         <span className={
                             practiseRound === 2 ? (
-                                'bg-emerald-100 p-1 rounded w-1/2 h-fit' 
+                                'bg-emerald-100 p-1 rounded w-1/2 h-fit dark:bg-mist-500' 
                             ) : ( 
-                                'bg-sky-100 p-1 rounded w-1/2 h-fit'
+                                'bg-sky-100 p-1 rounded w-1/2 h-fit dark:bg-slate-500'
                             ) }
                         >{card.term}</span>
                         <span className={
                             practiseRound === 2 ? (
-                                'bg-emerald-100 p-1 rounded w-1/2' 
+                                'bg-emerald-100 p-1 rounded w-1/2 dark:bg-mist-500' 
                             ) : ( 
-                                'bg-sky-100 p-1 rounded w-1/2 '
+                                'bg-sky-100 p-1 rounded w-1/2 dark:bg-slate-500'
                             ) }
                         >{card.def}</span>
                     </div>
