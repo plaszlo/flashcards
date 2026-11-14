@@ -16,8 +16,8 @@ export const Registration = () => {
         }
 
         try {
-            await register(authDetails);
-            login();
+            const token = await register(authDetails);
+            login(token);
             toast.success("Registration is complete")
         }
         catch (error) {

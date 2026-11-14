@@ -18,8 +18,7 @@ async function postAuthRequest(endpoint, authDetails) {
         throw new Error(errorMessage);
     }
 
-    localStorage.setItem("token", data.token)
-    return true;
+    return data.token;
 }
 
 export const register = (authDetails) => postAuthRequest("Register", authDetails);

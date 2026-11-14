@@ -14,8 +14,8 @@ export const Login = () => {
         }
 
         try {
-            await authLogin(authDetails);
-            login();
+            const token = await authLogin(authDetails);
+            login(token);
         }
         catch (error) {
             toast.error(error.message);
