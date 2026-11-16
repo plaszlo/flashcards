@@ -33,7 +33,7 @@ export const AddCard = () => {
     <div className="border border-gray-400 p-2 rounded-xl mb-10">
         <form onSubmit={handleSubmit}>
             <div className='flex gap-2.5'>
-                <input name="term" type="text" placeholder="Term" className="bg-slate-100 w-1/2 rounded p-1 h-fit dark:bg-slate-300" maxLength={30}></input>
+                <input name="term" type="text" placeholder="Term" className="bg-slate-100 w-1/2 rounded p-1 h-fit dark:bg-slate-300" maxLength={60}></input>
                 <textarea 
                     ref={textareaRef} 
                     name="def" 

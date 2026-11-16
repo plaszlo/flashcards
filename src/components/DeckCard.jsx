@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useDeck } from '../context/CardContext';
 
 export const DeckCard = ({card}) => {
-  const { id, term, def, status } = card;
-  const { cardList, removeFromList, updateCard } = useDeck();
+  const { id, term, definition } = card;
+  const { removeFromList, updateCard } = useDeck();
   const textareaRef = useRef();
-  const [definition, setDefinition] = useState(def);
+  const [definitionInput, setDefinition] = useState(definition);
   const [termInput, setTerm] = useState(term);
 
   useEffect(() => {
@@ -14,20 +14,13 @@ export const DeckCard = ({card}) => {
     ta.style.height = `${ta.scrollHeight}px`;
   }, []);
 
-  const statusClasses = {
-    practising: 'bg-orange-100 dark:bg-taupe-500',
-    unlearnt: 'bg-sky-100 dark:bg-slate-500',
-    learnt: 'bg-emerald-50 text-slate-500 dark:bg-mist-500 dark:text-black',
-  };
-
   return (
     <div className=' p-2 flex gap-2.5'>
-      <i onClick={() => updateCard(id, {status: 'practising'})} className='bi bi-arrow-up-circle text-green-700 text-2xl hover:drop-shadow-[0_0_10px_rgba(80,230,80,0.9)]'></i>
       <input 
-        className={`${statusClasses[status]} w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit`}
+        className='bg-sky-100 dark:bg-slate-500 w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none h-fit'
         maxLength={30}
         value={termInput}
-        onBlur={() => {updateCard(id, {term: termInput})}}
+        onBlur={/*() => {updateCard(id, {term: termInput})}*/() => console.log("update term")}
         onChange={
           (e) => {
             setTerm(e.target.value);
@@ -35,10 +28,10 @@ export const DeckCard = ({card}) => {
         }
       ></input>
       <textarea 
-        className={`${statusClasses[status]}  w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none`}
+        className='bg-sky-100 dark:bg-slate-500  w-1/2 rounded p-1 whitespace-pre-line wrap-break-word min-w-0 overflow-hidden resize-none'
         ref={textareaRef}
-        value={definition}
-        onBlur={() => {updateCard(id, {def: definition})}}
+        value={definitionInput}
+        onBlur={/*() => {updateCard(id, {def: definition})}*/ () => console.log("update definition")}
         onChange={
           (e) => {
             e.target.style.height = '0px';

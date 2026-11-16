@@ -7,11 +7,12 @@ import practiceRoundSFX from '../assets/practice_round.mp3';
 import practiceCompleteSFX from '../assets/practice_complete.mp3';
 
 export const Practice = () => {
-    const { cardList, updateDeck } = useDeck();
+    const { cards } = useDeck();
 
-    const [practiceList, setPracticeList] = useState(
-        cardList.filter(card => card.status === 'practising')
-    );
+    const practiceList = [];
+    // const [practiceList, setPracticeList] = useState(
+    //     cardList.filter(card => card.status === 'practising')
+    // );
     const [isPractise, setIsPractise] = useState(false);
     const [practiseRound, setPractiseRound] = useState(0);
     const [practisedCards, setPractisedCards] = useState(new Set());
@@ -64,11 +65,11 @@ export const Practice = () => {
         }
     }, [practisedCards, practiceList.length])
 
-    useEffect(() => {
-        setPracticeList(
-            cardList.filter(card => card.status === 'practising')
-        );
-    }, [cardList]);
+    // useEffect(() => {
+    //     setPracticeList(
+    //         card.filter(card => card.status === 'practising')
+    //     );
+    // }, [card]);
 
   return (
     <div className="border border-gray-400 rounded-xl py-1 mb-10">
@@ -104,9 +105,9 @@ export const Practice = () => {
             { isPractise ? (
                 practiceList.map(card => (
                     <PracticeCard 
-                        key={card.id}
+                        key={cards.id}
                         card={card} 
-                        isPractised={practisedCards.has(card.id)}
+                        isPractised={practisedCards.has(cards.id)}
                         onPractised={(id) => {
                             setPractisedCards(prev => new Set(prev).add(id));
                         }}
@@ -114,21 +115,21 @@ export const Practice = () => {
                 ))
             ) : (
                 practiceList.map(card => (
-                    <div className="p-2 flex gap-2.5" key={card.id}>
+                    <div className="p-2 flex gap-2.5" key={cards.id}>
                         <span className={
                             practiseRound === 2 ? (
                                 'bg-emerald-100 p-1 rounded w-1/2 h-fit dark:bg-mist-500' 
                             ) : ( 
                                 'bg-sky-100 p-1 rounded w-1/2 h-fit dark:bg-slate-500'
                             ) }
-                        >{card.term}</span>
+                        >{cards.term}</span>
                         <span className={
                             practiseRound === 2 ? (
                                 'bg-emerald-100 p-1 rounded w-1/2 dark:bg-mist-500' 
                             ) : ( 
                                 'bg-sky-100 p-1 rounded w-1/2 dark:bg-slate-500'
                             ) }
-                        >{card.def}</span>
+                        >{cards.def}</span>
                     </div>
                 ))
             ) }
