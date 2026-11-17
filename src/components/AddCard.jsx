@@ -4,27 +4,28 @@ import { useDeck } from "../context/CardContext";
 
 
 export const AddCard = () => {
-    const { cardList, addToList } = useDeck();
+    const { cards, addCard } = useDeck();
     const textareaRef = useRef();
 
     function handleSubmit(e){
         e.preventDefault();
 
         const term = e.target.term.value.trim();
-        const def = e.target.def.value.trim();
+        const definition = e.target.definition.value.trim();
 
-        if(!term || !def){
+        if(!term || !definition){
             toast.error('Missing values');
             return
         }
 
-        if(cardList.some(card => card.term.toLowerCase() === term.toLowerCase())){
+        if(cards.some(card => card.term.toLowerCase() === term.toLowerCase())){
             toast.error('Duplicated Term!');
             return
         }
 
-        const newCard = {id: crypto.randomUUID(), term, def, status: 'unlearnt', repetition: 0, lastInterval: undefined}
-        addToList(newCard);
+        const cardContent = {term: term, definition: definition};
+        addCard(cardContent);
+        
         textareaRef.scrollHeight = '32px';
         e.target.reset();
     }
@@ -36,7 +37,7 @@ export const AddCard = () => {
                 <input name="term" type="text" placeholder="Term" className="bg-slate-100 w-1/2 rounded p-1 h-fit dark:bg-slate-300" maxLength={60}></input>
                 <textarea 
                     ref={textareaRef} 
-                    name="def" 
+                    name="definition" 
                     type="text" 
                     placeholder="Definition" 
                     className="bg-slate-100 w-1/2 rounded p-1 overflow-hidden resize-none h-8 dark:bg-slate-300" 

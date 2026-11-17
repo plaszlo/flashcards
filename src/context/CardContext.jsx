@@ -1,11 +1,7 @@
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { getCards } from "../services/cardService";
+import { fetchCardData } from "../services/cardService";
 import { AuthContext } from "./AuthContext";
 // import { cardReducer } from "../reducer/cardReducer";
-
-// const initialState = {
-//     cardList: JSON.parse(localStorage.getItem('cardList') || '[]')
-// }
 
 const CardContext = createContext(/*initialState*/);
 
@@ -23,60 +19,55 @@ export const CardProvider = ({children}) => {
 
         async function loadCards(){
             try {
-                const data = await getCards();
+                const data = await fetchCardData("GET");
                 setCards(data);
             } catch (error) {
                 console.error(error);
             }
         }
-
         loadCards();
     }, [isLoggedIn]);
 
-	// useEffect(() => {
-	// 	localStorage.setItem('cardList', JSON.stringify(state.cardList));
-	// }, [state.cardList]);
+	async function addCard(cardContent){
+		
 
-	function addToList(/*card*/){
+		try {
+			const card = await fetchCardData("POST", null, cardContent);
+			setCards(prevCards => [...prevCards, card]);
+		} catch (error) {
+			console.error(error);
+		}
 		
-		
-		// const updatedList = [card, ...state.cardList]
-		// dispatch({
-		// 	type: 'ADD_TO_LIST',
-		// 	payload: {
-		// 		cardList: updatedList
-		// 	}
-		// });
 	}
 
-	function removeFromList(/*id*/){
-		
-		
-		// const updatedList = state.cardList.filter(
-		// 	card => card.id !== id
-		// );
-		// dispatch({
-		// 	type: 'REMOVE_FROM_LIST',
-		// 	payload: {
-		// 		cardList: updatedList
-		// 	}
-		// })
+	async function removeCard(cardId){
+		try {
+			await fetchCardData("DELETE", cardId);
+
+			const updatedList = cards.filter(card => 
+				card.cardId !== cardId);
+				console.log(updatedList);
+			setCards(updatedList);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
-	function updateCard(/*id, updatedPart*/){
-		
-		
-		// const updatedList = state.cardList.map(card => 
-		// 	card.id === id
-		// 	? { ...card, ...updatedPart}
-		// 	: card
-		// )
-		// dispatch({
-		// 	type: 'UPDATE_CARD',
-		// 	payload: {
-		// 		cardList: updatedList
-		// 	}
-		// })
+	async function updateCard(cardId, cardContent){
+		try {
+			await fetchCardData("PATCH", cardId, cardContent);
+
+			const updatedList = cards.map(card => 
+				card.cardId === cardId
+				? { ...card, ...cardContent}
+				: card
+			);
+
+			setCards(updatedList);
+			console.log(updatedList);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function updateDeck(/*amendedElements, updatedPart*/){
@@ -98,8 +89,8 @@ export const CardProvider = ({children}) => {
 	const value = {
 		//cardList: state.cardList,
 		cards,
-		addToList,
-		removeFromList,
+		addCard,
+		removeCard,
 		updateCard,
 		updateDeck
 	};
