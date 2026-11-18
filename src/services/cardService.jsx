@@ -1,10 +1,9 @@
-// const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = 'http://localhost:5073/Card';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function fetchCardData(method, cardId = null, cardContent = null){
     const token = localStorage.getItem("token");
 
-    const route = cardId ? `${API_URL}/${cardId}` : API_URL;
+    const route = cardId ? `${API_URL}/Card/${cardId}` : `${API_URL}/Card`;
 
     const requestOptions = {
         method: method,
