@@ -1,18 +1,31 @@
 import { useRef, useState } from "react";
 import { PracticeCard } from "./PracticeCard";
 import { useEffect } from "react";
+import { getPracticeList } from "../services/cardService";
 import { useDeck } from "../context/CardContext";
 
 import practiceRoundSFX from '../assets/practice_round.mp3';
 import practiceCompleteSFX from '../assets/practice_complete.mp3';
 
 export const Practice = () => {
-    const { cards } = useDeck();
+    //const { cards } = useDeck();
 
-    const practiceList = [];
-    // const [practiceList, setPracticeList] = useState(
-    //     cardList.filter(card => card.status === 'practising')
-    // );
+    const [practiceList, setPracticeList] = useState([]);;
+
+    useEffect(() => {
+        const fetchList = async () => {
+            try {
+                const data = await getPracticeList();
+                setPracticeList(data);
+            } catch (error) {
+                console.error("Failed to fetch practice list:", error);
+            }
+    };
+
+    fetchList();
+    }, []);
+
+
     const [isPractise, setIsPractise] = useState(false);
     const [practiseRound, setPractiseRound] = useState(0);
     const [practisedCards, setPractisedCards] = useState(new Set());
@@ -22,13 +35,8 @@ export const Practice = () => {
         practiceCompleteSFX: new Audio(practiceCompleteSFX)
     })
 
-    function handleShuffle(e){
-        e.preventDefault();
-        setPracticeList(shuffle([...practiceList]));
-    }
-
     function handleWordsSubmit(){
-        updateDeck(practisedCards, {status: 'learnt'});
+        // updateDeck(practisedCards, {status: 'learnt'});
         setPractiseRound(0);
         setPractisedCards(new Set());
     }
@@ -99,37 +107,37 @@ export const Practice = () => {
                     ></i>
                 ))}
             </div>
-            <button onClick={handleShuffle} className="bg-blue-700 rounded px-4 py-1 m-2 text-white">Shuffle</button>
+            <button onClick={() => setPracticeList(shuffle([...practiceList]))} className="bg-blue-700 rounded px-4 py-1 m-2 text-white">Shuffle</button>
         </div>
         <>
             { isPractise ? (
                 practiceList.map(card => (
                     <PracticeCard 
-                        key={cards.id}
+                        key={card.cardId}
                         card={card} 
-                        isPractised={practisedCards.has(cards.id)}
-                        onPractised={(id) => {
-                            setPractisedCards(prev => new Set(prev).add(id));
+                        isPractised={practisedCards.has(card.cardId)}
+                        onPractised={(cardId) => {
+                            setPractisedCards(prev => new Set(prev).add(cardId));
                         }}
                     />
                 ))
             ) : (
                 practiceList.map(card => (
-                    <div className="p-2 flex gap-2.5" key={cards.id}>
+                    <div className="p-2 flex gap-2.5" key={card.cardId}>
                         <span className={
                             practiseRound === 2 ? (
                                 'bg-emerald-100 p-1 rounded w-1/2 h-fit dark:bg-mist-500' 
                             ) : ( 
                                 'bg-sky-100 p-1 rounded w-1/2 h-fit dark:bg-slate-500'
                             ) }
-                        >{cards.term}</span>
+                        >{card.term}</span>
                         <span className={
                             practiseRound === 2 ? (
                                 'bg-emerald-100 p-1 rounded w-1/2 dark:bg-mist-500' 
                             ) : ( 
                                 'bg-sky-100 p-1 rounded w-1/2 dark:bg-slate-500'
                             ) }
-                        >{cards.def}</span>
+                        >{card.definition}</span>
                     </div>
                 ))
             ) }

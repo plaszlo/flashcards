@@ -31,3 +31,21 @@ export async function fetchCardData(method, cardId = null, cardContent = null){
 
     return data;
 }
+
+export async function getPracticeList(){
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/PracticeCards`, {
+        method: "GET",
+        headers: {"Authorization": `Bearer ${token}`}
+    });
+
+    const data = await response.json();
+
+    if (!response.ok){
+        const errorMessage = data.errors;
+        throw new Error(errorMessage);
+    }
+
+    return data;
+}
