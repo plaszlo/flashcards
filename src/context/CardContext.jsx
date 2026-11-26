@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { fetchCardData } from "../services/cardService";
+import { createContext, useContext, useEffect, useState } from "react";
+import { fetchCardData, getCalendarCards } from "../services/cardService";
 import { AuthContext } from "./AuthContext";
-// import { cardReducer } from "../reducer/cardReducer";
 
-const CardContext = createContext(/*initialState*/);
+const CardContext = createContext();
 
 export const CardProvider = ({children}) => {
-    // const [state, dispatch] = useReducer(cardReducer, initialState);
 	const [cards, setCards] = useState([]);
+	const [calendarCards, setCalendarCards] = useState([]);
+	const [dailyList, setDailyList] = useState([]);
 
 	const { isLoggedIn } = useContext(AuthContext);
 	
@@ -24,20 +24,31 @@ export const CardProvider = ({children}) => {
             } catch (error) {
                 console.error(error);
             }
+
+			try {
+				const data = await getCalendarCards();
+				setCalendarCards(data);
+
+				const today = new Date().toISOString().split("T")[0];
+				const todaysList = data.filter(card =>
+					card.nextReview.split("T")[0] === today
+				);
+
+				setDailyList(todaysList);
+			} catch (error) {
+				console.error("Failed to fetch practice list:", error);
+			}
         }
         loadCards();
     }, [isLoggedIn]);
 
 	async function addCard(cardContent){
-		
-
 		try {
 			const card = await fetchCardData("POST", null, cardContent);
 			setCards(prevCards => [...prevCards, card]);
 		} catch (error) {
 			console.error(error);
 		}
-		
 	}
 
 	async function removeCard(cardId){
@@ -87,8 +98,10 @@ export const CardProvider = ({children}) => {
 	}
 
 	const value = {
-		//cardList: state.cardList,
 		cards,
+		calendarCards,
+		dailyList,
+		setDailyList,
 		addCard,
 		removeCard,
 		updateCard,

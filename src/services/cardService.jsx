@@ -32,13 +32,15 @@ export async function fetchCardData(method, cardId = null, cardContent = null){
     return data;
 }
 
-export async function getPracticeList(){
+export async function getCalendarCards(){
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`${API_URL}/PracticeCards`, {
+    const response = await fetch(`${API_URL}`, {
         method: "GET",
         headers: {"Authorization": `Bearer ${token}`}
     });
+
+    // TODO: check empty responses
 
     const data = await response.json();
 
