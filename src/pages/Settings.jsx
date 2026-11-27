@@ -38,7 +38,7 @@ export const Settings = () => {
 
    return (
       <main className="max-w-7xl mx-auto p-5 min-h-screen dark:bg-slate-900">
-         <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2">
+         <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2 dark:border-slate-800 dark:ring dark:ring-inset dark:ring-slate-800">
             <h1 className="text-xl font-semibold mb-5 dark:text-slate-300 ">Settings</h1>
             <form onSubmit={handleAmend} className='mb-2'>
                <div className="grid grid-cols-4 gap-2">

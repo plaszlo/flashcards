@@ -31,7 +31,7 @@ export const AddCard = () => {
     }
     
   return (
-    <div className="border border-gray-400 p-2 rounded-xl mb-10">
+    <div className="border border-gray-400 p-2 rounded-xl mb-10 dark:border-slate-800 dark:ring dark:ring-inset dark:ring-slate-800">
         <form onSubmit={handleSubmit}>
             <div className='flex gap-2.5'>
                 <input name="term" type="text" placeholder="Term" className="bg-slate-100 w-1/2 rounded p-1 h-fit dark:bg-slate-300" maxLength={60}></input>
@@ -46,7 +46,7 @@ export const AddCard = () => {
                         e.target.style.height = `${e.target.scrollHeight}px`;
                     }}
                 ></textarea>
-                <button type="submit" className="bg-green-700 text-white rounded px-4 py-1 h-fit">Add</button>
+                <button type="submit" className="bg-green-700 text-white rounded px-4 py-1 h-fit cursor-pointer hover:bg-green-800"><i className="bi bi-plus-lg [-webkit-text-stroke:0.5px]"></i></button>
             </div>
             
         </form>

@@ -23,7 +23,7 @@ export const Login = () => {
     }
 
   return (
-    <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2 mb-5">
+    <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2 mb-5 dark:border-slate-800 dark:ring dark:ring-inset dark:ring-slate-800">
         <h1 className="font-semibold text-xl mb-5 dark:text-slate-300">Login</h1>
 
         <form onSubmit={handleRegister}>

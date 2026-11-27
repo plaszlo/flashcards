@@ -58,7 +58,7 @@ export const Calendar = () => {
     }, []);
 
     return (
-        <div className="border border-gray-400 rounded-xl p-2 mb-10">
+        <div className="border border-gray-400 rounded-xl p-2 mb-10  dark:border-slate-800 dark:ring dark:ring-inset dark:ring-slate-800">
             <h2 className="text-xl font-semibold mb-2 dark:text-slate-300">Calendar</h2>
 
             <div className='flex'>
@@ -67,7 +67,7 @@ export const Calendar = () => {
                     {weekNumbers.map(week => (
                         <ul
                             key={week}
-                            className="border border-gray-200 rounded h-6 mb-1"
+                            className="border border-gray-200 rounded h-6 mb-1 dark:border-slate-800 dark:border"
                         >
                             <li>{week}</li>
                         </ul>
@@ -87,7 +87,7 @@ export const Calendar = () => {
                     {calendarDays.map((date, index) => (
                         <button
                             key={index}
-                            className={`bg-sky-100 rounded cursor-pointer dark:bg-slate-500 border-2 ${
+                            className={`bg-sky-100 rounded cursor-pointer hover:bg-[oklch(91%_0.026_236.824)] dark:bg-slate-500 dark:hover:bg-slate-600 border-2 ${
                                 selectedIndex === index 
                                     ? 'border-sky-600 dark:border-sky-400' 
                                     : 'border-transparent'

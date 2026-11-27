@@ -26,7 +26,7 @@ export const Registration = () => {
     }
 
     return (
-    <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2">
+    <div className="max-w-xl mx-auto border border-gray-400 rounded-xl p-2 dark:border-slate-800 dark:ring dark:ring-inset dark:ring-slate-800">
         <h1 className="font-semibold text-xl mb-5 dark:text-slate-300">Register</h1>
 
         <form onSubmit={handleRegister}>
