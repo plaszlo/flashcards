@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchCardData, getCalendarCards } from "../services/cardService";
+import { fetchCardData, fetchStudyData } from "../services/cardService";
 import { AuthContext } from "./AuthContext";
 
 const CardContext = createContext();
@@ -26,7 +26,7 @@ export const CardProvider = ({children}) => {
             }
 
 			try {
-				const data = await getCalendarCards();
+				const data = await fetchStudyData("GET");
 				setCalendarCards(data);
 
 				const today = new Date().toISOString().split("T")[0];
@@ -81,6 +81,12 @@ export const CardProvider = ({children}) => {
 		}
 	}
 
+	function removeLapsed(lapsedIds) {
+		setCards(prevCards =>
+			prevCards.filter(card => !lapsedIds.includes(card.cardId))
+		);
+	}
+
 	function updateDeck(/*amendedElements, updatedPart*/){
 		
 
@@ -105,6 +111,7 @@ export const CardProvider = ({children}) => {
 		addCard,
 		removeCard,
 		updateCard,
+		removeLapsed,
 		updateDeck
 	};
 	

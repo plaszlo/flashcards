@@ -32,15 +32,26 @@ export async function fetchCardData(method, cardId = null, cardContent = null){
     return data;
 }
 
-export async function getCalendarCards(){
+export async function fetchStudyData(method, cardIds = null){
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`${API_URL}`, {
-        method: "GET",
-        headers: {"Authorization": `Bearer ${token}`}
-    });
+    const route = cardIds ? `${API_URL}/Study/${cardIds}` : `${API_URL}/Study`;
 
-    // TODO: check empty responses
+    const requestOptions = {
+        method: method,
+        headers: {"Authorization": `Bearer ${token}`}
+    }
+    
+    if (cardIds !== null && cardIds !== undefined){
+        requestOptions.headers["Content-Type"] = "application/json";
+        requestOptions.body = JSON.stringify(cardIds);
+    }
+
+    const response = await fetch(route, requestOptions);
+
+    if (response.status === 204){
+        return
+    }
 
     const data = await response.json();
 
